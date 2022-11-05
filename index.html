@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Curvas de Bézier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="style/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <nav class="sidebar-navigation">
+        <ul>
+            <li onclick="criarCurva()">
+                <i class="fa fa-plus"></i>
+                <span class="tooltip">Criar nova curva</span>
+            </li>
+            <li onclick="changeNrAvaliacoes()">
+                <img src="icons/circle-nodes-solid.svg" width="20px" />
+                <label id="nrAvaliacoes">5</label>
+                <span class="tooltip">Número de avaliações</span>
+            </li>
+            <li class="modalBtn" onclick="modalDeletarCurva()">
+                <i class="fa fa-trash"></i>
+                <span class="tooltip">Deletar curva</span>
+            </li>
+            <li onclick="suffleCurva()">
+                <img src="icons/shuffle-solid.svg" width="20px" />
+                <span class="tooltip">Alternar curvas</span>
+            </li>
+            <li onclick="disableOption('1'), setPontosShow()">
+                <img src="icons/circle-solid.svg" width="5px" />
+                <div class="hidden" id="1"></div>
+                <span class="tooltip">Visualizar pontos de controle</span>
+            </li>
+            <li onclick="disableOption('2'), setPoligonaisShow()">
+                <img src="icons/ellipsis-solid.svg" width="20px" />
+                <div class="hidden" id="2"></div>
+                <span class="tooltip">Visualizar poligonais de controle</span>
+            </li>
+            <li onclick="disableOption('3'), setCurvasShow()">
+                <img src="icons/bezier-curve-solid.svg" width="20px" />
+                <div class="hidden" id="3"></div>
+                <span class="tooltip">Visualizar curvas</span>
+            </li>
+        </ul>
+    </nav>
+    <div style="color: white;">
+        Curva ativa: <span id="curvaAtiva" style="margin-right: 2rem;">1</span>
+        Quantidades de curva: <span id="curvas">1</span>
+    </div>
+    <div class="modal">
+        <div class="content">
+            <h1 class="title">Deletar curva</h1>
+            <p class="text">Qual a curva que você gostaria de deletar?</p>
+            <select id="deleteCurveSelect">
+
+            </select>
+            <button onclick="deletarCurva()">Selecionar</button>
+        </div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="script/index.js"></script>
+    <script src="script/pontos.js"></script>
+    <script src="script/canvas.js"></script>
+    <script src="script/bezier.js"></script>
+</body>
+
+</html>
