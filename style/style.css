@@ -138,7 +138,7 @@ body {
     color: black;
 }
 
-button {
+.modal .content button {
     width: 50%;
     padding: 0.5rem;
     background-color: #4949ff;
@@ -154,4 +154,64 @@ button {
     padding: 4px;
     border-radius: 5px;
     border: none;
+}
+
+.warning-edit {
+    position: fixed;
+    top: 0;
+    color: #ff971d;
+    padding: 10px;
+    background-color: #fff0cc;
+    border: 1px solid #b36100;
+    border-radius: 5px;
+    right: 0;
+    display: none;
+}
+
+.warning-edit button {
+    border: none;
+    color: #ff971d;
+    background: transparent;
+    margin-left: 37px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.tabbar {
+    background: #2F3545;
+    border-radius: 6px;
+    width: 145px;
+    color: white;
+    position: fixed;
+    display: none;
+    height: fit-content;
+}
+
+.tabbar div {
+    display: flex;
+    justify-content: end;
+
+}
+
+.tabbar div i {
+    cursor: pointer;
+}
+
+.tabbar ul {
+    display: flex;
+}
+
+.tabbar ul li {
+    padding: 8px;
+    text-align: center;
+    display: grid;
+    cursor: pointer;
+}
+
+.tabbar ul li i {
+    font-size: 20px;
+}
+
+.tabbar ul li span {
+    font-size: 13px;
 }

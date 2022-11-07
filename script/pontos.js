@@ -1,6 +1,7 @@
 let curvas = 0;
 var arrayPontos = [[]];
 let curvaAtiva = 0;
+let pontoArray = 0;
 
 let pontosShow = true;
 let poligonaisShow = true;
@@ -45,6 +46,25 @@ function criarCurva() {
   setCurvaAtiva(curvaAtiva + 1);
   arrayPontos.length++;
   arrayPontos[curvas] = [];
+}
+
+//Verifica se o ponto já existe
+function verificarPonto(ponto, array) {
+  for (let i = 0; i < array.length; i++) {
+    if (isBetween(ponto[0], array[i][0]) && isBetween(ponto[1], array[i][1])) {
+      pontoArray = i;
+      return true;
+    }
+  }
+  return false;
+}
+
+//Função de comparação dos pontos com margem de 4px
+function isBetween(valorPonto, valorArray) {
+  let valorUp = valorArray + 4;
+  let valorDown = valorArray - 4;
+  if (valorPonto < valorUp && valorPonto > valorDown) return true;
+  return false;
 }
 
 //Alterna curva ativa
@@ -94,10 +114,41 @@ function deletarCurva() {
 //Adiciona um ponto na curva selecionada
 function addPonto(pontoX, pontoY) {
   let ponto = [pontoX, pontoY];
-  arrayPontos[curvaAtiva].push(ponto);
+  let exists = verificarPonto(ponto, arrayPontos[curvaAtiva]);
+  if (!exists) {
+    arrayPontos[curvaAtiva].push(ponto);
+    reDraw();
+  } else {
+    pontoOptions(pontoX, pontoY);
+  }
+}
+
+//Altera um ponto escolhido na curva selecionada
+function changePonto(pontoX, pontoY) {
+  let ponto = [pontoX, pontoY];
+  let oldIndex = pontoArray;
+  let exists = verificarPonto(ponto, arrayPontos[curvaAtiva]);
+  if (!exists) {
+    arrayPontos[curvaAtiva][oldIndex] = ponto;
+    reDraw();
+    setEditPonto();
+  } else {
+    setEditPonto();
+  }
+}
+
+//Função de deletar um ponto selecionado
+function deletarPonto() {
+  arrayPontos[curvaAtiva].splice(pontoArray, 1);
   reDraw();
-  paintDot(pontoX, pontoY);
-  createLine();
+  hiddePopup();
+}
+
+//Função de editar um ponto selecionado
+function editarPonto() {
+  setWarningEdit();
+  hiddePopup();
+  setEditPonto();
 }
 
 // Verifica o array para criar a linha
